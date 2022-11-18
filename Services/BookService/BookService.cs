@@ -26,7 +26,7 @@ namespace Library_System.Services.BookService
             int skip = (inputs.index - 1) * inputs.size;
             int take = inputs.size;
 
-            var data = _IUnitOfWork.BookRepository.AllAsIQueryable();
+            var data = _IUnitOfWork.BookRepository.AllAsIQueryable(null,new string[] { "library" } );
 
             
 
