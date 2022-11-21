@@ -11,6 +11,7 @@ namespace Enum
         AccountDisabled,
         WrongCredentials,
         validationError,
-        ServerError
+        ServerError,
+        BadInput
     }
 }

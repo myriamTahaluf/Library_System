@@ -32,6 +32,6 @@ namespace Library_System.Model
         
         public User User { get; set; }
         public Library library { get; set; }
-        public ICollection<Library_Book> library_Books { get; set; }
+        //public ICollection<Library> library { get; set; }
     }
 }

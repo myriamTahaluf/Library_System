@@ -4,6 +4,7 @@ using Library_System.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Model.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20221121053634_update4")]
+    partial class update4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,21 @@ namespace Model.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("BookLibrary", b =>
+                {
+                    b.Property<Guid>("BooksId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("libraryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("BooksId", "libraryId");
+
+                    b.HasIndex("libraryId");
+
+                    b.ToTable("BookLibrary");
+                });
 
             modelBuilder.Entity("Library_System.Model.Book", b =>
                 {
@@ -50,8 +67,6 @@ namespace Model.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Library_Id");
 
                     b.HasIndex("Reserved_User_Id");
 
@@ -111,26 +126,28 @@ namespace Model.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Library_System.Model.Book", b =>
+            modelBuilder.Entity("BookLibrary", b =>
                 {
-                    b.HasOne("Library_System.Model.Library", "library")
-                        .WithMany("Books")
-                        .HasForeignKey("Library_Id")
+                    b.HasOne("Library_System.Model.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Library_System.Model.Library", null)
+                        .WithMany()
+                        .HasForeignKey("libraryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Library_System.Model.Book", b =>
+                {
                     b.HasOne("Library_System.Model.User", "User")
                         .WithMany("Books")
                         .HasForeignKey("Reserved_User_Id");
 
                     b.Navigation("User");
-
-                    b.Navigation("library");
-                });
-
-            modelBuilder.Entity("Library_System.Model.Library", b =>
-                {
-                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Library_System.Model.User", b =>

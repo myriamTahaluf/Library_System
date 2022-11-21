@@ -17,6 +17,8 @@ namespace Library_System.AutoMapper
             CreateMap<UserDTO, RegisterInput>().ReverseMap();
             CreateMap<Library, LibraryDTO>().ReverseMap();
             CreateMap<Book, BookDTO>().ReverseMap();
+            CreateMap<BookInput, BookDTO>().ReverseMap();
+            CreateMap<BookEditInput, BookDTO>().ReverseMap();
          
         }
 

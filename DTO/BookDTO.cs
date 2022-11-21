@@ -24,6 +24,7 @@ namespace DTO
         public bool Is_Available_To_Reserve { get; set; } = true;
 
         public UserDTO User { get; set; }
-        public LibraryDTO library { get; set; }
+        public LibraryDTO Library { get; set; }
+        public ICollection<LibraryDTO> libraries { get; set; }
     }
 }

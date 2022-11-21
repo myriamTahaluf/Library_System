@@ -21,8 +21,8 @@ namespace Library_System.Model
         //[ForeignKey(nameof(Books))]
         //public Guid ?Book_Id { get; set; }
          
-        public Book Books { get; set; }
-        public ICollection<Library_Book> library_Books { get; set; }
+        //public Book Books { get; set; }
+        public ICollection<Book> Books { get; set; }
 
 
     }
